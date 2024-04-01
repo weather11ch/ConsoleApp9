@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 Console.WriteLine("Введите номер задачи (от 1 до 10)");
 int k = Int32.Parse(Console.ReadLine());
@@ -237,6 +238,14 @@ static void Forth7()
 {
     //6. Создайте массив строк. Заполните его произвольными именами людей.
     //Отсортируйте массив.Результат выведите на консоль.
+    string[] arrayName = { "Иван", "Алексей", "Яков", "Денис", "Ирина", "Света" };
+   Array.Sort(arrayName);
+    for (int i = 0; i < arrayName.Length; i++)
+    {
+        
+        Console.Write(arrayName[i] + " ");
+    }
+    Console.WriteLine();
 
 }
 static void Forth8()
@@ -283,10 +292,53 @@ static void Forth9()
 {
     //8. Умножение двух матриц
     //Создайте два массива целых чисел размером 3х3(две матрицы).
-//Напишите программу для умножения двух матриц.
-//Первый массив: { { 1,0,0,0},{ 0,1,0,0},{ 0,0,0,0} }
-//Второй массив: { { 1,2,3},{ 1,1,1},{ 0,0,0},{ 2,1,0} }
-//Ожидаемый результат: 1 2 3 1 1 1 0 0 0
+    //Напишите программу для умножения двух матриц.
+    //Первый массив: { { 1,0,0,0},{ 0,1,0,0},{ 0,0,0,0} }
+    //Второй массив: { { 1,2,3},{ 1,1,1},{ 0,0,0},{ 2,1,0} }
+    //Ожидаемый результат: 1 2 3 1 1 1 0 0 0
+    int lengthRow = 3;
+    int lengthCol = 3;
+    int[,] array1 = { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 } };
+    int[,] array2 = { { 1, 2, 3 }, { 1, 1, 1 }, { 0, 0, 0 } };
+    int[,] arrayRes = { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } }; 
+    for (int i = 0; i < array1.GetLength(0); i++)
+    {
+        for (int j = 0; j < array1.GetLength(1); j++)
+        {            
+            Console.Write(array1[i, j] + " ");
+        }
+        Console.WriteLine();
+    }
+    Console.WriteLine();
+    for (int i = 0; i < array2.GetLength(0); i++)
+    {
+        for (int j = 0; j < array2.GetLength(1); j++)
+        {            
+            Console.Write(array2[i, j] + " ");
+        }
+        Console.WriteLine();
+    }
+    Console.WriteLine();
+    for (int k = 0; k < array1.GetLength(0); k++)
+    {
+        for (int i = 0; i < array2.GetLength(1); i++)
+        {
+            for (int j = 0; j < array2.GetLength(0); j++)
+            {
+                arrayRes[k, j] = arrayRes[k, j] + (array1[k, j] * array2[j, i]);                
+            }            
+        }
+    }
+
+    for (int i = 0; i < lengthRow; i++)
+    {
+        for (int j = 0; j < lengthCol; j++)
+        {
+            Console.Write(arrayRes[i, j] + " ");
+        }
+        Console.WriteLine();
+    }
+
 
 
 
@@ -377,21 +429,28 @@ static void Forth12()
     Console.WriteLine();
 
     int temp = array[0,0];
+    int k = lengthCol - 1;
 
     Console.WriteLine();
+   
     for (int i = 0; i < lengthRow; i++)
     {
-        for (int j = 0; j < lengthCol; j++)
+       // Console.WriteLine("row " + i);
+        int j = 0;
+        while (j < lengthCol - 1)              
         {
-            if (array[i,j] >= array[i,j+1])
+            if (array[i, j] > array[i, j + 1])
             {
-                temp = array[i,j+1];
-                array[i,j] = array[j,j];
-                array[i,j] = temp;
-            }
+               // Console.WriteLine(array[i, j] + "  " + array[i, j + 1]);
+                temp = array[i, j];
+                array[i, j] = array[i, j + 1];
+                array[i, j + 1] = temp;
+                j=0;
+            } else { j++; }
         }
     }
-    Console.WriteLine("отсортированный по возрастанию массив");
+
+    Console.WriteLine("Строки массива отсортированные по возрастанию");
     for (int i = 0; i < lengthRow; i++)
     {
         for (int j = 0; j < lengthCol; j++)
