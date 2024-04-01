@@ -3,7 +3,7 @@
 using System;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-Console.WriteLine("Введите номер задачи (от 1 до 10)");
+Console.WriteLine("Введите номер задачи (от 1 до 12)");
 int k = Int32.Parse(Console.ReadLine());
 switch (k)
 {
@@ -17,8 +17,8 @@ switch (k)
     case 8: Forth8(); break;
     case 9: Forth9(); break;
     case 10: Forth10(); break;
-        case 11: Forth11(); break;
-        case 12: Forth12(); break;
+    case 11: Forth11(); break;
+    case 12: Forth12(); break;
 }
 
 static void Forth1()
@@ -338,10 +338,6 @@ static void Forth9()
         }
         Console.WriteLine();
     }
-
-
-
-
 }
 static void Forth10()
 {
