@@ -3,7 +3,7 @@
 using System;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-Console.WriteLine("Введите номер задачи (от 1 до 10)");
+Console.WriteLine("Введите номер задачи (от 1 до 12)");
 int k = Int32.Parse(Console.ReadLine());
 switch (k)
 {
@@ -17,8 +17,8 @@ switch (k)
     case 8: Forth8(); break;
     case 9: Forth9(); break;
     case 10: Forth10(); break;
-        case 11: Forth11(); break;
-        case 12: Forth12(); break;
+    case 11: Forth11(); break;
+    case 12: Forth12(); break;
 }
 
 static void Forth1()
@@ -41,12 +41,13 @@ static void Forth1()
     }
     Console.WriteLine("Введите число для поиска среди элементов массива");
     int number = int.Parse(Console.ReadLine());
-
+    int k = 0;
     for (int i = 0; i < length; i++)
     {
-        if (array[i] == number) { Console.WriteLine("Заданное число входит в массив"); }
-        else { Console.WriteLine("Заданное число не входит в массив"); }
+        if (array[i] == number) { Console.WriteLine("Заданное число входит в массив"); break; }
+        else {k++;}
     }
+    if (k == length) { Console.WriteLine("Заданное число не входит в массив"); };
 }
 static void Forth2()
 {
@@ -111,8 +112,8 @@ static void Forth3()
         array[i] = rnd.Next(maxNumber);
         Console.Write(array[i] + " ");
     }
-    int maxArrayNumber = 0;
-    int minArrayNumber = 0;
+    int maxArrayNumber = array[0];
+    int minArrayNumber = array[0];
     int avgArrayNumber = 0;
 
     for (int i = 0; i < length; i++)
@@ -198,11 +199,14 @@ static void Forth5()
     int[] array2 = new int[length];
     int j = 0;
 
-    for (int i = 1; i < length; i+=2)
-    {        
-        array2[j] = array[i] ;
-        Console.Write(array2[j] + " ");
-        j++;
+    for (int i = 1; i < length; i+=1)
+    {
+        if (array[i] % 2 == 0)
+        {
+            array2[j] = array[i];
+            Console.Write(array2[j] + " ");
+            j++;            
+        }
     }
 
 }
@@ -266,15 +270,16 @@ static void Forth8()
     }
     Console.WriteLine();
 
-    int temp = array[0];
+    
     
     Console.WriteLine();
     for (int i = 0; i < length; i++)
-    {
+    {        
         for (int j = i + 1; j < length; j++)
         {
             if (array[i] >= array[j])
             {
+                int temp;
                 temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
@@ -338,10 +343,6 @@ static void Forth9()
         }
         Console.WriteLine();
     }
-
-
-
-
 }
 static void Forth10()
 {
@@ -360,17 +361,17 @@ static void Forth10()
         }
         Console.WriteLine();
     }
-    int Sum = 0;
+    int sum = 0;
     
     for (int i = 0; i < lengthRow; i++)
     {
         for (int j = 0; j < lengthCol; j++)
         {
-            Sum += array[i, j]; 
+            sum += array[i, j]; 
         }        
     }
 
-    Console.WriteLine(Sum);
+    Console.WriteLine(sum);
 
 }
 static void Forth11()
@@ -425,12 +426,7 @@ static void Forth12()
             Console.Write(array[i, j] + " ");
         }
         Console.WriteLine();
-    }
-    Console.WriteLine();
-
-    int temp = array[0,0];
-    int k = lengthCol - 1;
-
+    }    
     Console.WriteLine();
    
     for (int i = 0; i < lengthRow; i++)
@@ -441,6 +437,7 @@ static void Forth12()
         {
             if (array[i, j] > array[i, j + 1])
             {
+                int temp;
                // Console.WriteLine(array[i, j] + "  " + array[i, j + 1]);
                 temp = array[i, j];
                 array[i, j] = array[i, j + 1];
